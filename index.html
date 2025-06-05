@@ -258,66 +258,68 @@
     <!-- Contacto Section -->
     <section id="contacto" class="py-20 bg-gradient-to-b from-gray-900 to-black">
         <div class="container mx-auto px-4">
-            <h2 class="text-4xl font-bold text-center mb-16 font-['Cormorant_Garamond']">
+            <h2 class="text-4xl font-bold text-center mb-16 relative font-['Cormorant_Garamond']">
                 <span class="bg-clip-text text-transparent bg-gradient-to-r from-amber-400 to-amber-600">
-                    Contacta con Nosotros
+                    Contacto
                 </span>
             </h2>
+            
             <div class="max-w-2xl mx-auto">
-                <div class="animate-fade-in-down">
-                    <div class="bg-gray-800/50 p-8 rounded-lg">
-                        <h3 class="text-2xl font-bold mb-6 text-amber-400 text-center">Información de Contacto</h3>
-                        <div class="space-y-4">
-                            <div class="flex items-center space-x-4">
-                                <i class="fas fa-map-marker-alt text-2xl text-amber-400"></i>
-                                <div>
-                                    <h4 class="font-bold text-gray-300">Ubicación</h4>
-                                    <p class="text-gray-400">Santo Tomé, Argentina</p>
-                                </div>
-                            </div>
-                            <div class="flex items-center space-x-4">
-                                <i class="fas fa-phone text-2xl text-amber-400"></i>
-                                <div>
-                                    <h4 class="font-bold text-gray-300">Teléfono</h4>
-                                    <p class="text-gray-400">+54 342 123 4567</p>
-                                </div>
-                            </div>
-                            <div class="flex items-center space-x-4">
-                                <i class="fas fa-envelope text-2xl text-amber-400"></i>
-                                <div>
-                                    <h4 class="font-bold text-gray-300">Email</h4>
-                                    <p class="text-gray-400">info@gintosantotome.com</p>
-                                </div>
-                            </div>
+                <form id="contactForm" class="space-y-6" onsubmit="sendWhatsApp(event)">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div>
+                            <label for="name" class="block text-sm font-medium text-gray-300 mb-2">Nombre</label>
+                            <input type="text" id="name" name="name" required
+                                class="w-full px-4 py-3 bg-gray-800/50 border border-gray-700 rounded-lg text-white focus:outline-none focus:border-amber-400 transition-colors">
                         </div>
-                        <div class="mt-8">
-                            <h4 class="font-bold text-gray-300 mb-4 text-center">Horario de Atención</h4>
-                            <div class="space-y-2 text-gray-400 text-center">
-                                <p>Jueves: 21:00 - 12:00</p>
-                                <p>Viernes: 21:00 - 02:00</p>
-                                <p>Sábado: 21:00 - 03:00</p>
-                                <p class="text-amber-400/80">Domingo a Miércoles: Cerrado</p>
-                            </div>
-                        </div>
-                        <div class="mt-8">
-                            <h4 class="font-bold text-gray-300 mb-4 text-center">Síguenos</h4>
-                            <div class="flex justify-center space-x-4">
-                                <a href="https://www.instagram.com/ginto.santotome/" target="_blank" class="text-gray-400 hover:text-amber-400 transition-colors text-2xl">
-                                    <i class="fab fa-instagram"></i>
-                                </a>
-                                <a href="#" class="text-gray-400 hover:text-amber-400 transition-colors text-2xl">
-                                    <i class="fab fa-facebook"></i>
-                                </a>
-                                <a href="#" class="text-gray-400 hover:text-amber-400 transition-colors text-2xl">
-                                    <i class="fab fa-twitter"></i>
-                                </a>
-                            </div>
+                        <div>
+                            <label for="email" class="block text-sm font-medium text-gray-300 mb-2">Email</label>
+                            <input type="email" id="email" name="email" required
+                                class="w-full px-4 py-3 bg-gray-800/50 border border-gray-700 rounded-lg text-white focus:outline-none focus:border-amber-400 transition-colors">
                         </div>
                     </div>
-                </div>
+                    
+                    <div>
+                        <label for="subject" class="block text-sm font-medium text-gray-300 mb-2">Asunto</label>
+                        <input type="text" id="subject" name="subject" required
+                            class="w-full px-4 py-3 bg-gray-800/50 border border-gray-700 rounded-lg text-white focus:outline-none focus:border-amber-400 transition-colors">
+                    </div>
+                    
+                    <div>
+                        <label for="message" class="block text-sm font-medium text-gray-300 mb-2">Mensaje</label>
+                        <textarea id="message" name="message" rows="4" required
+                            class="w-full px-4 py-3 bg-gray-800/50 border border-gray-700 rounded-lg text-white focus:outline-none focus:border-amber-400 transition-colors"></textarea>
+                    </div>
+                    
+                    <div class="text-center">
+                        <button type="submit"
+                            class="inline-flex items-center px-8 py-3 bg-amber-400 text-black rounded-lg font-bold hover:bg-amber-300 transition-colors">
+                            <i class="fab fa-whatsapp mr-2"></i>
+                            Enviar por WhatsApp
+                        </button>
+                    </div>
+                </form>
             </div>
         </div>
     </section>
+
+    <script>
+        function sendWhatsApp(event) {
+            event.preventDefault();
+            
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const subject = document.getElementById('subject').value;
+            const message = document.getElementById('message').value;
+            
+            const whatsappNumber = '5493425420251';
+            const text = `*Nuevo mensaje de contacto*%0A%0A*Nombre:* ${name}%0A*Email:* ${email}%0A*Asunto:* ${subject}%0A%0A*Mensaje:*%0A${message}`;
+            
+            const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${text}`;
+            
+            window.open(whatsappUrl, '_blank');
+        }
+    </script>
 
     <!-- Footer -->
     <footer class="bg-black py-12 border-t border-amber-400/20">
