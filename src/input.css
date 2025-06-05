@@ -1,0 +1,53 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+  .btn-primary {
+    @apply bg-amber-400 text-black px-6 py-2 rounded-full hover:bg-amber-500 transition-all transform hover:scale-105;
+  }
+
+  .card {
+    @apply bg-gray-700 rounded-lg overflow-hidden transform hover:scale-105 transition-all duration-300;
+  }
+
+  .nav-link {
+    @apply hover:text-amber-400 transition-colors duration-300;
+  }
+}
+
+/* Animaciones personalizadas */
+.animate-fade-in {
+  animation: fadeIn 1s ease-in;
+}
+
+.animate-slide-up {
+  animation: slideUp 0.5s ease-out;
+}
+
+.animate-slide-down {
+  animation: slideDown 0.5s ease-out;
+}
+
+/* Efectos de hover personalizados */
+.hover-glow:hover {
+  box-shadow: 0 0 15px rgba(251, 191, 36, 0.5);
+}
+
+/* Estilos para el scroll */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #1a1a1a;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #4a4a4a;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #666;
+}

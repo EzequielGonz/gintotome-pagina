@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ginto Santo Tomé - Gin Premium</title>
+    <link rel="stylesheet" href="src/output.css">
+    <script src="https://unpkg.com/alpinejs" defer></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body class="bg-gradient-to-br from-gray-900 via-gray-800 to-black text-white font-['Inter']">
+    <!-- Navbar -->
+    <nav class="fixed w-full bg-black/80 backdrop-blur-sm z-50 border-b border-amber-400/20">
+        <div class="container mx-auto px-4 py-4">
+            <div class="flex justify-between items-center">
+                <div class="text-2xl font-bold text-amber-400 hover:text-amber-300 transition-colors cursor-pointer font-['Cormorant_Garamond']">
+                    <span class="animate-pulse-slow">GINTO</span>
+                </div>
+                <div class="hidden md:flex space-x-8">
+                    <a href="#inicio" class="nav-link group relative">
+                        Inicio
+                        <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-amber-400 group-hover:w-full transition-all duration-300"></span>
+                    </a>
+                    <a href="tienda.html" class="nav-link group relative">
+                        Tienda
+                        <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-amber-400 group-hover:w-full transition-all duration-300"></span>
+                    </a>
+                    <a href="#nosotros" class="nav-link group relative">
+                        Nosotros
+                        <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-amber-400 group-hover:w-full transition-all duration-300"></span>
+                    </a>
+                    <a href="#experiencias" class="nav-link group relative">
+                        Experiencias
+                        <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-amber-400 group-hover:w-full transition-all duration-300"></span>
+                    </a>
+                    <a href="#contacto" class="nav-link group relative">
+                        Contacto
+                        <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-amber-400 group-hover:w-full transition-all duration-300"></span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="inicio" class="min-h-screen flex items-center justify-center relative overflow-hidden">
+        <video class="absolute inset-0 w-full h-full object-cover opacity-20" autoplay muted loop>
+            <source src="img/videos/background.mp4" type="video/mp4">
+        </video>
+        <div class="absolute inset-0 bg-gradient-radial from-transparent to-black/80"></div>
+        <div class="container mx-auto px-4 text-center relative z-10">
+            <h1 class="text-5xl md:text-7xl font-bold mb-6 animate-fade-in font-['Cormorant_Garamond']">
+                <span class="bg-clip-text text-transparent bg-gradient-to-r from-amber-400 to-amber-600">
+                    Ginto Santo Tomé
+                </span>
+            </h1>
+            <p class="text-xl md:text-2xl mb-8 text-gray-300 animate-slide-up">
+                El arte de la destilación en cada copa
+            </p>
+            <a href="tienda.html" class="btn-primary group relative overflow-hidden inline-block">
+                <span class="relative z-10">Ver Tienda</span>
+                <div class="absolute inset-0 bg-gradient-to-r from-amber-400 to-amber-600 transform scale-x-0 group-hover:scale-x-100 transition-transform origin-left"></div>
+            </a>
+        </div>
+        <div class="absolute bottom-10 left-1/2 transform -translate-x-1/2 animate-bounce-slow">
+            <i class="fas fa-chevron-down text-amber-400 text-2xl"></i>
+        </div>
+    </section>
+
+    <!-- Productos Destacados Section -->
+    <section id="productos" class="py-20 bg-gradient-to-b from-gray-800 to-gray-900">
+        <div class="container mx-auto px-4">
+            <h2 class="text-4xl font-bold text-center mb-16 relative font-['Cormorant_Garamond']">
+                <span class="bg-clip-text text-transparent bg-gradient-to-r from-amber-400 to-amber-600">
+                    Productos Destacados
+                </span>
+            </h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Gin Premium -->
+                <div class="card group hover-glow">
+                    <div class="relative overflow-hidden">
+                        <img src="img/gin1.jpg" alt="Gin Premium" class="w-full h-64 object-cover transform group-hover:scale-110 transition-transform duration-500">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-2 text-amber-400">Gin Premium</h3>
+                        <p class="text-gray-300 mb-4">Notas de enebro y cítricos con un toque de especias exóticas.</p>
+                        <a href="tienda.html" class="btn-primary w-full inline-block text-center">
+                            Ver en Tienda
+                        </a>
+                    </div>
+                </div>
+                <!-- Gin Tonic -->
+                <div class="card group hover-glow">
+                    <div class="relative overflow-hidden">
+                        <img src="img/gin2.jpg" alt="Gin Tonic" class="w-full h-64 object-cover transform group-hover:scale-110 transition-transform duration-500">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-2 text-amber-400">Gin Tonic Signature</h3>
+                        <p class="text-gray-300 mb-4">Nuestra mezcla exclusiva con tónicas artesanales.</p>
+                        <a href="tienda.html" class="btn-primary w-full inline-block text-center">
+                            Ver en Tienda
+                        </a>
+                    </div>
+                </div>
+                <!-- Kit Premium -->
+                <div class="card group hover-glow">
+                    <div class="relative overflow-hidden">
+                        <img src="img/kit.jpg" alt="Kit Premium" class="w-full h-64 object-cover transform group-hover:scale-110 transition-transform duration-500">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-2 text-amber-400">Kit de Coctelería Premium</h3>
+                        <p class="text-gray-300 mb-4">Set completo para preparar cocteles profesionales.</p>
+                        <a href="tienda.html" class="btn-primary w-full inline-block text-center">
+                            Ver en Tienda
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="text-center mt-12">
+                <a href="tienda.html" class="inline-block bg-amber-400 text-black px-8 py-3 rounded-lg font-bold hover:bg-amber-300 transition-colors">
+                    Ver Todos los Productos
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Nosotros Section -->
+    <section id="nosotros" class="py-20 bg-gradient-to-b from-gray-900 to-black relative overflow-hidden">
+        <div class="absolute inset-0 bg-gradient-shine animate-shimmer"></div>
+        <div class="container mx-auto px-4 relative z-10">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+                <div class="animate-slide-in-left">
+                    <h2 class="text-4xl font-bold mb-8 font-['Cormorant_Garamond']">
+                        <span class="bg-clip-text text-transparent bg-gradient-to-r from-amber-400 to-amber-600">
+                            Nuestra Historia
+                        </span>
+                    </h2>
+                    <p class="text-gray-300 mb-6 leading-relaxed">
+                        En Ginto Santo Tomé, nos apasiona la artesanía y la excelencia. Nuestro gin es el resultado 
+                        de una cuidadosa selección de ingredientes y un proceso de destilación tradicional que 
+                        preserva la esencia de cada elemento.
+                    </p>
+                    <div class="grid grid-cols-2 gap-6">
+                        <div class="text-center p-4 bg-gray-800/50 rounded-lg hover:bg-gray-800/80 transition-colors">
+                            <i class="fas fa-medal text-3xl text-amber-400 mb-3"></i>
+                            <h3 class="font-bold text-amber-400">Calidad Premium</h3>
+                            <p class="text-sm text-gray-400">Ingredientes seleccionados</p>
+                        </div>
+                        <div class="text-center p-4 bg-gray-800/50 rounded-lg hover:bg-gray-800/80 transition-colors">
+                            <i class="fas fa-award text-3xl text-amber-400 mb-3"></i>
+                            <h3 class="font-bold text-amber-400">Tradición</h3>
+                            <p class="text-sm text-gray-400">Proceso artesanal</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="relative animate-slide-in-right">
+                    <div class="aspect-w-4 aspect-h-3 rounded-lg overflow-hidden">
+                        <img src="https://i.ibb.co/rKgR8TyF/nick-fewings-l-Pt-AEk-W8-UIg-unsplash.jpg" alt="Nuestra Historia" class="w-full h-full object-cover transform hover:scale-105 transition-transform duration-500">
+                    </div>
+                    <div class="absolute -bottom-6 -right-6 w-32 h-32 bg-amber-400/20 rounded-full animate-pulse-slow"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Experiencias Section -->
+    <section id="experiencias" class="py-20 bg-gradient-to-b from-black to-gray-900">
+        <div class="container mx-auto px-4">
+            <h2 class="text-4xl font-bold text-center mb-16 font-['Cormorant_Garamond']">
+                <span class="bg-clip-text text-transparent bg-gradient-to-r from-amber-400 to-amber-600">
+                    Experiencias Ginto
+                </span>
+            </h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Experiencia 1 -->
+                <div class="card group hover-glow">
+                    <div class="p-6">
+                        <i class="fas fa-glass-martini-alt text-4xl text-amber-400 mb-4"></i>
+                        <h3 class="text-xl font-bold mb-4 text-amber-400">Cata Privada</h3>
+                        <p class="text-gray-300 mb-4">Descubre los matices de nuestros gins en una experiencia personalizada.</p>
+                        <ul class="text-gray-400 mb-6 space-y-2">
+                            <li class="flex items-center">
+                                <i class="fas fa-check text-amber-400 mr-2"></i>
+                                Degustación guiada
+                            </li>
+                            <li class="flex items-center">
+                                <i class="fas fa-check text-amber-400 mr-2"></i>
+                                Maridaje especial
+                            </li>
+                            <li class="flex items-center">
+                                <i class="fas fa-check text-amber-400 mr-2"></i>
+                                Experiencia única
+                            </li>
+                        </ul>
+                        <button class="btn-primary w-full">
+                            Reservar Ahora
+                        </button>
+                    </div>
+                </div>
+                <!-- Experiencia 2 -->
+                <div class="card group hover-glow">
+                    <div class="p-6">
+                        <i class="fas fa-cocktail text-4xl text-amber-400 mb-4"></i>
+                        <h3 class="text-xl font-bold mb-4 text-amber-400">Mixología</h3>
+                        <p class="text-gray-300 mb-4">Aprende a crear cocteles con nuestros expertos.</p>
+                        <ul class="text-gray-400 mb-6 space-y-2">
+                            <li class="flex items-center">
+                                <i class="fas fa-check text-amber-400 mr-2"></i>
+                                Técnicas avanzadas
+                            </li>
+                            <li class="flex items-center">
+                                <i class="fas fa-check text-amber-400 mr-2"></i>
+                                Recetas exclusivas
+                            </li>
+                            <li class="flex items-center">
+                                <i class="fas fa-check text-amber-400 mr-2"></i>
+                                Material incluido
+                            </li>
+                        </ul>
+                        <button class="btn-primary w-full">
+                            Reservar Ahora
+                        </button>
+                    </div>
+                </div>
+                <!-- Experiencia 3 -->
+                <div class="card group hover-glow">
+                    <div class="p-6">
+                        <i class="fas fa-users text-4xl text-amber-400 mb-4"></i>
+                        <h3 class="text-xl font-bold mb-4 text-amber-400">Eventos</h3>
+                        <p class="text-gray-300 mb-4">Celebra tus eventos con nosotros.</p>
+                        <ul class="text-gray-400 mb-6 space-y-2">
+                            <li class="flex items-center">
+                                <i class="fas fa-check text-amber-400 mr-2"></i>
+                                Barra premium
+                            </li>
+                            <li class="flex items-center">
+                                <i class="fas fa-check text-amber-400 mr-2"></i>
+                                Personalización
+                            </li>
+                            <li class="flex items-center">
+                                <i class="fas fa-check text-amber-400 mr-2"></i>
+                                Servicio completo
+                            </li>
+                        </ul>
+                        <button class="btn-primary w-full">
+                            Reservar Ahora
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contacto Section -->
+    <section id="contacto" class="py-20 bg-gradient-to-b from-gray-900 to-black">
+        <div class="container mx-auto px-4">
+            <h2 class="text-4xl font-bold text-center mb-16 font-['Cormorant_Garamond']">
+                <span class="bg-clip-text text-transparent bg-gradient-to-r from-amber-400 to-amber-600">
+                    Contacta con Nosotros
+                </span>
+            </h2>
+            <div class="max-w-2xl mx-auto">
+                <div class="animate-fade-in-down">
+                    <div class="bg-gray-800/50 p-8 rounded-lg">
+                        <h3 class="text-2xl font-bold mb-6 text-amber-400 text-center">Información de Contacto</h3>
+                        <div class="space-y-4">
+                            <div class="flex items-center space-x-4">
+                                <i class="fas fa-map-marker-alt text-2xl text-amber-400"></i>
+                                <div>
+                                    <h4 class="font-bold text-gray-300">Ubicación</h4>
+                                    <p class="text-gray-400">Santo Tomé, Argentina</p>
+                                </div>
+                            </div>
+                            <div class="flex items-center space-x-4">
+                                <i class="fas fa-phone text-2xl text-amber-400"></i>
+                                <div>
+                                    <h4 class="font-bold text-gray-300">Teléfono</h4>
+                                    <p class="text-gray-400">+54 342 123 4567</p>
+                                </div>
+                            </div>
+                            <div class="flex items-center space-x-4">
+                                <i class="fas fa-envelope text-2xl text-amber-400"></i>
+                                <div>
+                                    <h4 class="font-bold text-gray-300">Email</h4>
+                                    <p class="text-gray-400">info@gintosantotome.com</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mt-8">
+                            <h4 class="font-bold text-gray-300 mb-4 text-center">Horario de Atención</h4>
+                            <div class="space-y-2 text-gray-400 text-center">
+                                <p>Jueves: 21:00 - 12:00</p>
+                                <p>Viernes: 21:00 - 02:00</p>
+                                <p>Sábado: 21:00 - 03:00</p>
+                                <p class="text-amber-400/80">Domingo a Miércoles: Cerrado</p>
+                            </div>
+                        </div>
+                        <div class="mt-8">
+                            <h4 class="font-bold text-gray-300 mb-4 text-center">Síguenos</h4>
+                            <div class="flex justify-center space-x-4">
+                                <a href="https://www.instagram.com/ginto.santotome/" target="_blank" class="text-gray-400 hover:text-amber-400 transition-colors text-2xl">
+                                    <i class="fab fa-instagram"></i>
+                                </a>
+                                <a href="#" class="text-gray-400 hover:text-amber-400 transition-colors text-2xl">
+                                    <i class="fab fa-facebook"></i>
+                                </a>
+                                <a href="#" class="text-gray-400 hover:text-amber-400 transition-colors text-2xl">
+                                    <i class="fab fa-twitter"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-black py-12 border-t border-amber-400/20">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div class="animate-fade-in">
+                    <h4 class="text-xl font-bold mb-4 text-amber-400 font-['Cormorant_Garamond']">GINTO</h4>
+                    <p class="text-gray-400">El arte de la destilación en Santo Tomé.</p>
+                </div>
+                <div class="animate-slide-up">
+                    <h4 class="text-xl font-bold mb-4 text-amber-400">Enlaces</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#inicio" class="text-gray-400 hover:text-amber-400 transition-colors">Inicio</a></li>
+                        <li><a href="tienda.html" class="text-gray-400 hover:text-amber-400 transition-colors">Tienda</a></li>
+                        <li><a href="#nosotros" class="text-gray-400 hover:text-amber-400 transition-colors">Nosotros</a></li>
+                        <li><a href="#experiencias" class="text-gray-400 hover:text-amber-400 transition-colors">Experiencias</a></li>
+                        <li><a href="#contacto" class="text-gray-400 hover:text-amber-400 transition-colors">Contacto</a></li>
+                    </ul>
+                </div>
+                <div class="animate-slide-up">
+                    <h4 class="text-xl font-bold mb-4 text-amber-400">Contacto</h4>
+                    <ul class="space-y-2 text-gray-400">
+                        <li class="flex items-center space-x-2">
+                            <i class="fas fa-phone text-amber-400"></i>
+                            <span>+54 342 123 4567</span>
+                        </li>
+                        <li class="flex items-center space-x-2">
+                            <i class="fas fa-map-marker-alt text-amber-400"></i>
+                            <span>Iriondo 1920, Santo Tomé, Santa Fe 3016</span>
+                        </li>
+                    </ul>
+                </div>
+                <div class="animate-slide-up">
+                    <h4 class="text-xl font-bold mb-4 text-amber-400">Síguenos</h4>
+                    <div class="flex space-x-4">
+                        <a href="https://www.instagram.com/ginto.santotome/" target="_blank" class="text-gray-400 hover:text-amber-400 transition-colors text-2xl">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-amber-400 transition-colors text-2xl">
+                            <i class="fab fa-facebook"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-amber-400 transition-colors text-2xl">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="border-t border-gray-800 mt-8 pt-8 text-center text-gray-400">
+                <p>&copy; 2024 Ginto Santo Tomé. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
