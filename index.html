@@ -54,7 +54,7 @@
 </head>
 <body class="bg-gradient-to-br from-zinc-900 via-zinc-800 to-black text-zinc-50 font-['Inter']">
     <!-- Navbar -->
-    <nav class="fixed w-full bg-black/90 backdrop-blur-md z-50 border-b border-green-800/20">
+    <nav class="fixed w-full bg-black/90 backdrop-blur-md z-50 border-b border-green-800/20 border-amber-500/40">
         <div class="container mx-auto px-4 py-4">
             <div class="flex justify-between items-center">
                 <div class="text-2xl font-bold text-green-600 hover:text-green-500 transition-colors cursor-pointer font-['Cormorant_Garamond']">
@@ -88,18 +88,23 @@
 
     <!-- Hero Section -->
     <section id="inicio" class="min-h-screen flex items-center justify-center relative overflow-hidden">
-        <video class="absolute inset-0 w-full h-full object-cover opacity-40" autoplay muted loop>
+        <video class="absolute inset-0 w-full h-full object-cover opacity-40" autoplay muted loop playsinline>
             <source src="img/videos/background.mp4" type="video/mp4">
+            <!-- Fallback image for browsers/devices that don't support autoplaying video -->
+            <img src="img/hero_fallback.jpg" alt="Background image" class="absolute inset-0 w-full h-full object-cover">
         </video>
         <div class="absolute inset-0 bg-gradient-radial"></div>
         <div class="container mx-auto px-4 text-center relative z-10">
-            <h1 class="text-5xl md:text-7xl font-bold mb-6 animate-fade-in font-['Cormorant_Garamond']">
+            <h1 class="text-7xl md:text-9xl font-bold mb-4 animate-fade-in font-['Cormorant_Garamond']">
                 <span class="bg-clip-text text-transparent bg-gradient-to-r from-green-600 to-green-800">
-                    Ginto Santo Tomé
+                    GINTO
                 </span>
             </h1>
-            <p class="text-xl md:text-2xl mb-8 text-green-500 animate-slide-up">
+            <p class="text-xl md:text-2xl mb-4 text-green-500 animate-slide-up">
                 Descubrí el arte del cocktail, donde cada trago cuenta una historia
+            </p>
+            <p class="text-base md:text-lg mb-8 text-green-500/80 animate-slide-up">
+                Ginto Santo Tomé
             </p>
             <a href="tienda.html" class="inline-block bg-green-800 text-white px-8 py-3 rounded-lg font-bold hover:bg-green-700 transition-colors group relative overflow-hidden">
                 <span class="relative z-10">Ver Carta</span>
