@@ -8,20 +8,209 @@
     <script src="https://unpkg.com/alpinejs" defer></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        .btn-primary {
+            @apply bg-green-800 text-white px-6 py-2 rounded-lg font-bold hover:bg-green-700 transition-colors;
+        }
+        .card {
+            @apply bg-zinc-900/50 rounded-lg overflow-hidden border border-zinc-700/50 hover:border-green-800/50 transition-all duration-300;
+        }
+        .hover-glow:hover {
+            @apply shadow-lg shadow-green-800/20;
+        }
+        .nav-link {
+            @apply text-green-600 hover:text-green-500 transition-colors;
+        }
+        .animate-pulse-slow {
+            animation: pulse 3s infinite;
+        }
+        .animate-bounce-slow {
+            animation: bounce 2s infinite;
+        }
+        .animate-shimmer {
+            animation: shimmer 3s infinite;
+        }
+        @keyframes shimmer {
+            0% {
+                background-position: -100% 0;
+            }
+            100% {
+                background-position: 200% 0;
+            }
+        }
+        .bg-gradient-shine {
+            background: linear-gradient(
+                90deg,
+                transparent 0%,
+                rgba(22, 101, 52, 0.1) 50%,
+                transparent 100%
+            );
+            background-size: 200% 100%;
+        }
+        .bg-gradient-radial {
+            background: radial-gradient(circle at center, transparent 0%, rgba(0, 0, 0, 0.9) 100%);
+        }
+    </style>
 </head>
-<body class="bg-gradient-to-br from-gray-900 via-gray-800 to-black text-white font-['Inter']" x-data="{ 
+<body class="bg-gradient-to-br from-zinc-900 via-zinc-800 to-black text-zinc-50 font-['Inter']" x-data="{ 
     cartOpen: false,
     cart: [],
+    products: [
+        // COCTELERIA
+        {
+            id: 1,
+            name: 'BAILEYS FROZEN',
+            description: 'Baileys, Helado, garnish de chocolate, galletitas Óreo',
+            image: 'https://live.staticflickr.com/650/21845693136_817fbb6268_b.jpg',
+            category: 'Cocteleria'
+        },
+        {
+            id: 2,
+            name: 'NEGRONI',
+            description: 'Gin, Campari, Vermouth Rosso',
+            image: 'https://images.immediate.co.uk/production/volatile/sites/54/2025/03/270320251743057754.jpeg?quality=90&resize=556,505',
+            category: 'Cocteleria'
+        },
+        {
+            id: 3,
+            name: 'MARGARITA BLUE',
+            description: 'Tequila, Blue Curaçao, Triple Sec y jugo de limón',
+            image: 'img/margaritablue.jpg',
+            category: 'Cocteleria'
+        },
+        {
+            id: 4,
+            name: 'PERFECT MANHATTAN',
+            description: 'Whisky, Vermut rosso, Vermut dry, Bitter Angostura',
+            image: 'img/perfectmanhattan.jpg',
+            category: 'Cocteleria'
+        },
+        {
+            id: 5,
+            name: 'MOJITO',
+            description: 'Ron, limón, menta, azúcar, soda',
+            image: 'https://assets.elgourmet.com/wp-content/uploads/2023/03/03b2129605f3c155fc7bedd2f1820183_3_3_photo.png',
+            category: 'Cocteleria'
+        },
+        // ESPUMANTES
+        {
+            id: 6,
+            name: 'CHANDON DELICE',
+            description: 'Champagne premium',
+            image: 'https://quirinobebidas.com.ar/wp-content/uploads/2020/06/CHANDON-DELICDE--300x300.jpg',
+            category: 'Espumantes'
+        },
+        {
+            id: 7,
+            name: 'CHANDON EXTRA BRUT',
+            description: 'Champagne extra brut',
+            image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQqNn6yhHWVcp_IK2xkSEfWtDrj6itNZ3H9zA&s',
+            category: 'Espumantes'
+        },
+        {
+            id: 8,
+            name: 'NAVARRO CORREAS DULCET',
+            description: 'Champagne dulce',
+            image: 'https://www.espaciovino.com.ar/media/default/0001/55/thumb_54531_default_big.jpeg',
+            category: 'Espumantes'
+        },
+        {
+            id: 9,
+            name: 'COPA CHANDON DELICE',
+            description: 'Copa de champagne Chandon Delice',
+            image: 'https://mercado.com.ar/wp-content/uploads/2025/06/IMG_0799-1.jpeg.webp',
+            category: 'Espumantes'
+        },
+        {
+            id: 10,
+            name: 'NAVARRO CORREA + 2 SPEED',
+            description: 'Champaña Navarro Correa Extra brut + 2 Speed energizante',
+            image: 'https://ss-static-01.esmsv.com/id/108667/productos/obtenerimagen/?id=201&useDensity=false&width=1280&height=720&tipoEscala=contain',
+            category: 'Espumantes'
+        },
+        // TRAGOS
+        {
+            id: 11,
+            name: 'GIN TONIC GORDONS LIMÓN',
+            description: 'Gin Gordons, tónica, piel de limón',
+            image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS5Lnjm0ZKwNzrR2c3Ws8_Q6TTzn3Ze-o1mTw&s',
+            category: 'Tragos'
+        },
+        {
+            id: 12,
+            name: 'GIN TONIC HEREDERO LIMON',
+            description: 'Gin heredero, Tónica, Piel de limón',
+            image: 'https://livanarestobar.com.ar/wp-content/uploads/2023/01/Livana-Restobar-Menu-Gin-Heredero-Pomelo.jpg',
+            category: 'Tragos'
+        },
+        {
+            id: 13,
+            name: 'MEDIDA BLACK LABEL',
+            description: 'Medida de whisky johnnie walker black label con o sin hielo',
+            image: 'https://acdn-us.mitiendanube.com/stores/001/211/660/products/black-750-3cd954a5de6e8bc3a516216300518825-640-0.png',
+            category: 'Tragos'
+        },
+        {
+            id: 14,
+            name: 'CUBA LIBRE',
+            description: 'Ron, Coca-Cola y limón',
+            image: 'https://cuberspremium.com/wp-content/uploads/2017/06/receta-cubalibre.jpg',
+            category: 'Tragos'
+        },
+        {
+            id: 15,
+            name: 'FERNET CON COCA',
+            description: 'Fernet con Coca-Cola',
+            image: 'https://franchoxbar.wordpress.com/wp-content/uploads/2018/07/img_20180630_181858_826.jpg',
+            category: 'Tragos'
+        },
+        // SIN ALCOHOL
+        {
+            id: 16,
+            name: 'AGUA MINERAL',
+            description: 'Agua mineral natural',
+            image: 'https://cloudfront-us-east-1.images.arcpublishing.com/infobae/643PRDW2SZE4JP4HHMJYIYDWS4.jpg',
+            category: 'Sin Alchol'
+        },
+        {
+            id: 17,
+            name: 'COPA DE COCA-COLA',
+            description: 'Coca-Cola en copa',
+            image: 'https://media.istockphoto.com/id/1225230295/es/foto/cierre-el-vaso-de-refrescante-cola.jpg?s=612x612&w=0&k=20&c=o60iA_MJGuwRUYmd8AK8lp-LGcNInE1jFTsfHtYN1iw=',
+            category: 'Sin Alchol'
+        },
+        {
+            id: 18,
+            name: 'LIMONADA CON ALMIBAR DE JENGIBRE',
+            description: 'Jugo de limón, Almibar de Jengibre, Soda y limones',
+            image: 'https://img-global.cpcdn.com/recipes/49fb8f19a7125857/680x482cq90/limonada-con-almibar-de-menta-foto-principal.jpg',
+            category: 'Sin Alchol'
+        },
+        {
+            id: 19,
+            name: 'ARUVA',
+            description: 'Jugo de limón, arandanos, uvas, almibar y tónica',
+            image: 'img/aruva.png',
+            category: 'Sin Alchol'
+        },
+        {
+            id: 20,
+            name: 'SPEED ENERGIZANTE',
+            description: 'Energizante',
+            image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTKnp17tIcyfSkbYskComHqEYWriQye9yHMvg&s',
+            category: 'Sin Alchol'
+        }
+    ],
     addToCart(product) {
         this.cart.push(product);
-        this.showNotification('Producto añadido al carrito');
+        this.showNotification('Producto añadido a consulta');
     },
     removeFromCart(index) {
         this.cart.splice(index, 1);
     },
     showNotification(message) {
         const notification = document.createElement('div');
-        notification.className = 'fixed bottom-4 right-4 bg-amber-400 text-black px-6 py-3 rounded-lg shadow-lg transform transition-all duration-500 translate-y-full opacity-0';
+        notification.className = 'fixed bottom-4 right-4 bg-green-800 text-white px-6 py-3 rounded-lg shadow-lg transform transition-all duration-500 translate-y-full opacity-0';
         notification.textContent = message;
         document.body.appendChild(notification);
         setTimeout(() => {
@@ -31,40 +220,80 @@
             notification.classList.add('translate-y-full', 'opacity-0');
             setTimeout(() => notification.remove(), 500);
         }, 2000);
-    }
+    },
+    addProduct(name, description, image, category) {
+        const newProduct = {
+            id: this.products.length + 1,
+            name: name,
+            description: description,
+            image: image,
+            category: category
+        };
+        this.products.push(newProduct);
+        this.showNotification('Producto agregado exitosamente');
+    },
+    sendWhatsAppQuery() {
+        if (this.cart.length === 0) {
+            this.showNotification('No hay productos en consulta');
+            return;
+        }
+        
+        const phoneNumber = '5493425420251'; // Número de WhatsApp sin el +
+        const message = this.generateWhatsAppMessage();
+        const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
+        
+        window.open(whatsappUrl, '_blank');
+        this.showNotification('Abriendo WhatsApp...');
+    },
+    generateWhatsAppMessage() {
+        let message = '🍸 *Consulta de Productos - Ginto Santo Tomé*\n\n';
+        message += 'Hola! Me gustaría consultar sobre los siguientes productos:\n\n';
+        
+        this.cart.forEach((item, index) => {
+            message += `${index + 1}. *${item.name}*\n`;
+            message += `   ${item.description}\n\n`;
+        });
+        
+        message += `Total de productos: ${this.cart.length}\n\n`;
+        message += 'Por favor, ¿podrían informarme sobre disponibilidad y precios?\n\n';
+        message += '¡Gracias! 🍹';
+        
+        return message;
+    },
+    selectedCategory: 'all'
 }">
     <!-- Navbar -->
-    <nav class="fixed w-full bg-black/80 backdrop-blur-sm z-50 border-b border-amber-400/20">
+    <nav class="fixed w-full bg-black/90 backdrop-blur-md z-50 border-b border-green-800/20">
         <div class="container mx-auto px-4 py-4">
             <div class="flex justify-between items-center">
-                <a href="index.html" class="text-2xl font-bold text-amber-400 hover:text-amber-300 transition-colors cursor-pointer font-['Cormorant_Garamond']">
-                    <span class="animate-pulse-slow">GINTO</span>
+                <a href="index.html" class="text-2xl font-bold text-green-600 hover:text-green-500 transition-colors cursor-pointer font-['Cormorant_Garamond']">
+                    <img src="img/IMG_3526[1].PNG" alt="Logo Ginto" class="h-12">
                 </a>
                 <div class="hidden md:flex space-x-8">
                     <a href="index.html#inicio" class="nav-link group relative">
                         Inicio
-                        <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-amber-400 group-hover:w-full transition-all duration-300"></span>
+                        <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-green-800/50 group-hover:w-full transition-all duration-300"></span>
                     </a>
                     <a href="tienda.html" class="nav-link group relative">
                         Tienda
-                        <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-amber-400 group-hover:w-full transition-all duration-300"></span>
+                        <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-green-800/50 group-hover:w-full transition-all duration-300"></span>
                     </a>
                     <a href="index.html#nosotros" class="nav-link group relative">
                         Nosotros
-                        <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-amber-400 group-hover:w-full transition-all duration-300"></span>
+                        <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-green-800/50 group-hover:w-full transition-all duration-300"></span>
                     </a>
                     <a href="index.html#experiencias" class="nav-link group relative">
                         Experiencias
-                        <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-amber-400 group-hover:w-full transition-all duration-300"></span>
+                        <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-green-800/50 group-hover:w-full transition-all duration-300"></span>
                     </a>
                     <a href="index.html#contacto" class="nav-link group relative">
                         Contacto
-                        <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-amber-400 group-hover:w-full transition-all duration-300"></span>
+                        <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-green-800/50 group-hover:w-full transition-all duration-300"></span>
                     </a>
                 </div>
                 <!-- Carrito Icon -->
-                <button @click="cartOpen = !cartOpen" class="relative text-amber-400 hover:text-amber-300 transition-colors">
-                    <i class="fas fa-shopping-cart text-xl"></i>
+                <button @click="cartOpen = !cartOpen" class="relative text-green-600 hover:text-green-500 transition-colors">
+                    <i class="fas fa-question-circle text-xl"></i>
                     <span x-show="cart.length > 0" class="absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">
                         <span x-text="cart.length"></span>
                     </span>
@@ -82,7 +311,7 @@
          x-transition:leave="transition ease-in duration-200"
          x-transition:leave-start="opacity-100"
          x-transition:leave-end="opacity-0">
-        <div class="absolute right-0 top-0 h-full w-96 bg-gray-900 shadow-xl transform transition-transform"
+        <div class="absolute right-0 top-0 h-full w-96 bg-zinc-900 shadow-xl transform transition-transform"
              x-transition:enter="transition ease-out duration-300"
              x-transition:enter-start="translate-x-full"
              x-transition:enter-end="translate-x-0"
@@ -91,21 +320,21 @@
              x-transition:leave-end="translate-x-full">
             <div class="p-6">
                 <div class="flex justify-between items-center mb-6">
-                    <h3 class="text-2xl font-bold text-amber-400">Carrito</h3>
-                    <button @click="cartOpen = false" class="text-gray-400 hover:text-white">
+                    <h3 class="text-2xl font-bold text-green-600">Consulta</h3>
+                    <button @click="cartOpen = false" class="text-zinc-400 hover:text-white">
                         <i class="fas fa-times"></i>
                     </button>
                 </div>
                 <div class="space-y-4 max-h-[calc(100vh-200px)] overflow-y-auto">
                     <template x-if="cart.length === 0">
-                        <p class="text-gray-400 text-center py-8">Tu carrito está vacío</p>
+                        <p class="text-zinc-400 text-center py-8">No hay productos en consulta</p>
                     </template>
                     <template x-for="(item, index) in cart" :key="index">
-                        <div class="flex items-center space-x-4 bg-gray-800/50 p-4 rounded-lg">
+                        <div class="flex items-center space-x-4 bg-zinc-800/50 p-4 rounded-lg">
                             <img :src="item.image" :alt="item.name" class="w-16 h-16 object-cover rounded">
                             <div class="flex-1">
-                                <h4 class="text-amber-400 font-bold" x-text="item.name"></h4>
-                                <p class="text-gray-400" x-text="item.price"></p>
+                                <h4 class="text-green-600 font-bold" x-text="item.name"></h4>
+                                <p class="text-zinc-400" x-text="item.price"></p>
                             </div>
                             <button @click="removeFromCart(index)" class="text-red-400 hover:text-red-300">
                                 <i class="fas fa-trash"></i>
@@ -113,13 +342,15 @@
                         </div>
                     </template>
                 </div>
-                <div class="mt-6 pt-6 border-t border-gray-800">
+                <div class="mt-6 pt-6 border-t border-zinc-800">
                     <div class="flex justify-between items-center mb-4">
-                        <span class="text-gray-400">Total:</span>
-                        <span class="text-2xl font-bold text-amber-400" x-text="'$' + cart.reduce((sum, item) => sum + parseFloat(item.price.replace('$', '')), 0).toFixed(2)"></span>
+                        <span class="text-zinc-400">Productos:</span>
+                        <span class="text-2xl font-bold text-green-600" x-text="cart.length"></span>
                     </div>
-                    <button class="w-full bg-amber-400 text-black font-bold py-3 rounded-lg hover:bg-amber-300 transition-colors">
-                        Proceder al Pago
+                    <button @click="sendWhatsAppQuery()" 
+                            class="w-full bg-green-800 text-white font-bold py-3 rounded-lg hover:bg-green-700 transition-colors flex items-center justify-center">
+                        <i class="fab fa-whatsapp mr-2"></i>
+                        Enviar Consulta por WhatsApp
                     </button>
                 </div>
             </div>
@@ -127,363 +358,104 @@
     </div>
 
     <!-- Hero Section -->
-    <section class="pt-32 pb-20 bg-gradient-to-b from-gray-800 to-gray-900">
+    <section class="pt-32 pb-20 bg-gradient-to-b from-zinc-800 to-zinc-900">
         <div class="container mx-auto px-4">
             <h1 class="text-5xl font-bold text-center mb-8 font-['Cormorant_Garamond']">
-                <span class="bg-clip-text text-transparent bg-gradient-to-r from-amber-400 to-amber-600">
-                    Nuestra Tienda
+                <span class="bg-clip-text text-transparent bg-gradient-to-r from-green-600 to-green-800">
+                    Nuestra Carta
                 </span>
             </h1>
-            <p class="text-xl text-center text-gray-300 mb-12 max-w-2xl mx-auto">
-                Descubre nuestra selección de gins premium y accesorios exclusivos
+            <p class="text-xl text-center text-zinc-300 mb-12 max-w-2xl mx-auto">
+                Descubre nuestra selección de tragos premium y accesorios exclusivos
             </p>
-        </div>
-    </section>
-
-    <!-- Productos Grid -->
-    <section class="py-20 bg-gradient-to-b from-gray-900 to-black">
-        <div class="container mx-auto px-4">
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <!-- Gin Premium -->
-                <div class="card group hover-glow" x-data="{ showDetails: false }">
-                    <div class="relative overflow-hidden">
-                        <img src="img/gin1.jpg" alt="Gin Premium" class="w-full h-64 object-cover transform group-hover:scale-110 transition-transform duration-500">
-                        <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                        <button @click="showDetails = true" class="absolute inset-0 w-full h-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                            <span class="bg-amber-400 text-black px-4 py-2 rounded-lg transform -translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
-                                Ver Detalles
-                            </span>
-                        </button>
-                    </div>
-                    <div class="p-6">
-                        <h3 class="text-xl font-bold mb-2 text-amber-400">Gin Premium</h3>
-                        <p class="text-gray-300 mb-4">Notas de enebro y cítricos con un toque de especias exóticas.</p>
-                        <div class="flex justify-between items-center mb-4">
-                            <span class="text-2xl font-bold text-amber-400">$45.99</span>
-                            <span class="text-sm text-gray-400">750ml</span>
-                        </div>
-                        <button @click="addToCart({name: 'Gin Premium', price: '$45.99', image: 'img/gin1.jpg'})" 
-                                class="btn-primary w-full group">
-                            <span class="relative z-10">Añadir al Carrito</span>
-                            <div class="absolute inset-0 bg-gradient-to-r from-amber-400 to-amber-600 transform scale-x-0 group-hover:scale-x-100 transition-transform origin-left"></div>
-                        </button>
-                    </div>
-                    <!-- Modal de Detalles -->
-                    <div x-show="showDetails" 
-                         class="fixed inset-0 bg-black/80 z-50 flex items-center justify-center p-4"
-                         x-transition:enter="transition ease-out duration-300"
-                         x-transition:enter-start="opacity-0"
-                         x-transition:enter-end="opacity-100"
-                         x-transition:leave="transition ease-in duration-200"
-                         x-transition:leave-start="opacity-100"
-                         x-transition:leave-end="opacity-0">
-                        <div class="bg-gray-900 rounded-lg max-w-2xl w-full p-6 relative"
-                             x-transition:enter="transition ease-out duration-300"
-                             x-transition:enter-start="opacity-0 transform scale-95"
-                             x-transition:enter-end="opacity-100 transform scale-100"
-                             x-transition:leave="transition ease-in duration-200"
-                             x-transition:leave-start="opacity-100 transform scale-100"
-                             x-transition:leave-end="opacity-0 transform scale-95">
-                            <button @click="showDetails = false" class="absolute top-4 right-4 text-gray-400 hover:text-white">
-                                <i class="fas fa-times"></i>
-                            </button>
-                            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                                <img src="img/gin1.jpg" alt="Gin Premium" class="w-full h-64 object-cover rounded-lg">
-                                <div>
-                                    <h3 class="text-2xl font-bold text-amber-400 mb-4">Gin Premium</h3>
-                                    <p class="text-gray-300 mb-4">Nuestro gin premium es el resultado de una cuidadosa selección de ingredientes y un proceso de destilación tradicional que preserva la esencia de cada elemento.</p>
-                                    <ul class="space-y-2 mb-6">
-                                        <li class="flex items-center text-gray-300">
-                                            <i class="fas fa-check text-amber-400 mr-2"></i>
-                                            Graduación: 43% vol.
-                                        </li>
-                                        <li class="flex items-center text-gray-300">
-                                            <i class="fas fa-check text-amber-400 mr-2"></i>
-                                            Botella: 750ml
-                                        </li>
-                                        <li class="flex items-center text-gray-300">
-                                            <i class="fas fa-check text-amber-400 mr-2"></i>
-                                            Ingredientes naturales
-                                        </li>
-                                    </ul>
-                                    <div class="flex justify-between items-center">
-                                        <span class="text-3xl font-bold text-amber-400">$45.99</span>
-                                        <button @click="addToCart({name: 'Gin Premium', price: '$45.99', image: 'img/gin1.jpg'}); showDetails = false" 
-                                                class="bg-amber-400 text-black px-6 py-2 rounded-lg hover:bg-amber-300 transition-colors">
-                                            Añadir al Carrito
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Gin Tonic -->
-                <div class="card group hover-glow" x-data="{ showDetails: false }">
-                    <div class="relative overflow-hidden">
-                        <img src="img/gin2.jpg" alt="Gin Tonic" class="w-full h-64 object-cover transform group-hover:scale-110 transition-transform duration-500">
-                        <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                        <button @click="showDetails = true" class="absolute inset-0 w-full h-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                            <span class="bg-amber-400 text-black px-4 py-2 rounded-lg transform -translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
-                                Ver Detalles
-                            </span>
-                        </button>
-                    </div>
-                    <div class="p-6">
-                        <h3 class="text-xl font-bold mb-2 text-amber-400">Gin Tonic Signature</h3>
-                        <p class="text-gray-300 mb-4">Nuestra mezcla exclusiva con tónicas artesanales.</p>
-                        <div class="flex justify-between items-center mb-4">
-                            <span class="text-2xl font-bold text-amber-400">$39.99</span>
-                            <span class="text-sm text-gray-400">750ml</span>
-                        </div>
-                        <button @click="addToCart({name: 'Gin Tonic Signature', price: '$39.99', image: 'img/gin2.jpg'})" 
-                                class="btn-primary w-full group">
-                            <span class="relative z-10">Añadir al Carrito</span>
-                            <div class="absolute inset-0 bg-gradient-to-r from-amber-400 to-amber-600 transform scale-x-0 group-hover:scale-x-100 transition-transform origin-left"></div>
-                        </button>
-                    </div>
-                    <!-- Modal de Detalles -->
-                    <div x-show="showDetails" 
-                         class="fixed inset-0 bg-black/80 z-50 flex items-center justify-center p-4"
-                         x-transition:enter="transition ease-out duration-300"
-                         x-transition:enter-start="opacity-0"
-                         x-transition:enter-end="opacity-100"
-                         x-transition:leave="transition ease-in duration-200"
-                         x-transition:leave-start="opacity-100"
-                         x-transition:leave-end="opacity-0">
-                        <div class="bg-gray-900 rounded-lg max-w-2xl w-full p-6 relative"
-                             x-transition:enter="transition ease-out duration-300"
-                             x-transition:enter-start="opacity-0 transform scale-95"
-                             x-transition:enter-end="opacity-100 transform scale-100"
-                             x-transition:leave="transition ease-in duration-200"
-                             x-transition:leave-start="opacity-100 transform scale-100"
-                             x-transition:leave-end="opacity-0 transform scale-95">
-                            <button @click="showDetails = false" class="absolute top-4 right-4 text-gray-400 hover:text-white">
-                                <i class="fas fa-times"></i>
-                            </button>
-                            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                                <img src="img/gin2.jpg" alt="Gin Tonic" class="w-full h-64 object-cover rounded-lg">
-                                <div>
-                                    <h3 class="text-2xl font-bold text-amber-400 mb-4">Gin Tonic Signature</h3>
-                                    <p class="text-gray-300 mb-4">Una mezcla perfecta de nuestro gin premium con tónica artesanal, creada para ofrecer una experiencia única en cada sorbo.</p>
-                                    <ul class="space-y-2 mb-6">
-                                        <li class="flex items-center text-gray-300">
-                                            <i class="fas fa-check text-amber-400 mr-2"></i>
-                                            Graduación: 40% vol.
-                                        </li>
-                                        <li class="flex items-center text-gray-300">
-                                            <i class="fas fa-check text-amber-400 mr-2"></i>
-                                            Botella: 750ml
-                                        </li>
-                                        <li class="flex items-center text-gray-300">
-                                            <i class="fas fa-check text-amber-400 mr-2"></i>
-                                            Tónica artesanal incluida
-                                        </li>
-                                    </ul>
-                                    <div class="flex justify-between items-center">
-                                        <span class="text-3xl font-bold text-amber-400">$39.99</span>
-                                        <button @click="addToCart({name: 'Gin Tonic Signature', price: '$39.99', image: 'img/gin2.jpg'}); showDetails = false" 
-                                                class="bg-amber-400 text-black px-6 py-2 rounded-lg hover:bg-amber-300 transition-colors">
-                                            Añadir al Carrito
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Coctel Premium -->
-                <div class="card group hover-glow" x-data="{ showDetails: false }">
-                    <div class="relative overflow-hidden">
-                        <img src="img/gin3.jpg" alt="Coctel Premium" class="w-full h-64 object-cover transform group-hover:scale-110 transition-transform duration-500">
-                        <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                        <button @click="showDetails = true" class="absolute inset-0 w-full h-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                            <span class="bg-amber-400 text-black px-4 py-2 rounded-lg transform -translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
-                                Ver Detalles
-                            </span>
-                        </button>
-                    </div>
-                    <div class="p-6">
-                        <h3 class="text-xl font-bold mb-2 text-amber-400">Coctel Premium</h3>
-                        <p class="text-gray-300 mb-4">Mezclas únicas creadas por nuestros expertos mixólogos.</p>
-                        <div class="flex justify-between items-center mb-4">
-                            <span class="text-2xl font-bold text-amber-400">$49.99</span>
-                            <span class="text-sm text-gray-400">750ml</span>
-                        </div>
-                        <button @click="addToCart({name: 'Coctel Premium', price: '$49.99', image: 'img/gin3.jpg'})" 
-                                class="btn-primary w-full group">
-                            <span class="relative z-10">Añadir al Carrito</span>
-                            <div class="absolute inset-0 bg-gradient-to-r from-amber-400 to-amber-600 transform scale-x-0 group-hover:scale-x-100 transition-transform origin-left"></div>
-                        </button>
-                    </div>
-                    <!-- Modal de Detalles -->
-                    <div x-show="showDetails" 
-                         class="fixed inset-0 bg-black/80 z-50 flex items-center justify-center p-4"
-                         x-transition:enter="transition ease-out duration-300"
-                         x-transition:enter-start="opacity-0"
-                         x-transition:enter-end="opacity-100"
-                         x-transition:leave="transition ease-in duration-200"
-                         x-transition:leave-start="opacity-100"
-                         x-transition:leave-end="opacity-0">
-                        <div class="bg-gray-900 rounded-lg max-w-2xl w-full p-6 relative"
-                             x-transition:enter="transition ease-out duration-300"
-                             x-transition:enter-start="opacity-0 transform scale-95"
-                             x-transition:enter-end="opacity-100 transform scale-100"
-                             x-transition:leave="transition ease-in duration-200"
-                             x-transition:leave-start="opacity-100 transform scale-100"
-                             x-transition:leave-end="opacity-0 transform scale-95">
-                            <button @click="showDetails = false" class="absolute top-4 right-4 text-gray-400 hover:text-white">
-                                <i class="fas fa-times"></i>
-                            </button>
-                            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                                <img src="img/gin3.jpg" alt="Coctel Premium" class="w-full h-64 object-cover rounded-lg">
-                                <div>
-                                    <h3 class="text-2xl font-bold text-amber-400 mb-4">Coctel Premium</h3>
-                                    <p class="text-gray-300 mb-4">Una selección de nuestros mejores cocteles, creados por expertos mixólogos para ofrecer una experiencia única.</p>
-                                    <ul class="space-y-2 mb-6">
-                                        <li class="flex items-center text-gray-300">
-                                            <i class="fas fa-check text-amber-400 mr-2"></i>
-                                            Graduación: 38% vol.
-                                        </li>
-                                        <li class="flex items-center text-gray-300">
-                                            <i class="fas fa-check text-amber-400 mr-2"></i>
-                                            Botella: 750ml
-                                        </li>
-                                        <li class="flex items-center text-gray-300">
-                                            <i class="fas fa-check text-amber-400 mr-2"></i>
-                                            Receta exclusiva
-                                        </li>
-                                    </ul>
-                                    <div class="flex justify-between items-center">
-                                        <span class="text-3xl font-bold text-amber-400">$49.99</span>
-                                        <button @click="addToCart({name: 'Coctel Premium', price: '$49.99', image: 'img/gin3.jpg'}); showDetails = false" 
-                                                class="bg-amber-400 text-black px-6 py-2 rounded-lg hover:bg-amber-300 transition-colors">
-                                            Añadir al Carrito
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+            <!-- Botón Carta Digital -->
+            <div class="text-center">
+                <a href="https://menu.fu.do/gintolagintoneriadelcentro/qr-menu" 
+                   target="_blank"
+                   class="inline-flex items-center px-8 py-4 bg-gradient-to-r from-green-600 to-green-800 text-white font-bold rounded-lg shadow-lg hover:from-green-700 hover:to-green-900 transform hover:scale-105 transition-all duration-300 hover:shadow-xl group">
+                    <i class="fas fa-qrcode text-xl mr-3 group-hover:rotate-12 transition-transform duration-300"></i>
+                    Ver Carta Digital Completa
+                    <i class="fas fa-external-link-alt ml-3 group-hover:translate-x-1 transition-transform duration-300"></i>
+                </a>
             </div>
         </div>
     </section>
 
-    <!-- Accesorios Section -->
-    <section class="py-20 bg-gradient-to-b from-black to-gray-900">
+    <!-- Productos Grid -->
+    <section class="py-20 bg-gradient-to-b from-zinc-900 to-black">
         <div class="container mx-auto px-4">
-            <h2 class="text-4xl font-bold text-center mb-16 font-['Cormorant_Garamond']">
-                <span class="bg-clip-text text-transparent bg-gradient-to-r from-amber-400 to-amber-600">
-                    Accesorios Premium
-                </span>
-            </h2>
-            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
-                <!-- Copa de Gin -->
-                <div class="card group hover-glow" x-data="{ showDetails: false }">
-                    <div class="relative overflow-hidden">
-                        <img src="img/copa.jpg" alt="Copa de Gin" class="w-full h-48 object-cover transform group-hover:scale-110 transition-transform duration-500">
-                        <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                        <button @click="showDetails = true" class="absolute inset-0 w-full h-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                            <span class="bg-amber-400 text-black px-4 py-2 rounded-lg transform -translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
-                                Ver Detalles
-                            </span>
-                        </button>
-                    </div>
-                    <div class="p-6">
-                        <h3 class="text-xl font-bold mb-2 text-amber-400">Copa de Gin</h3>
-                        <p class="text-gray-300 mb-4">Copa premium para disfrutar de tu gin favorito.</p>
-                        <div class="flex justify-between items-center mb-4">
-                            <span class="text-2xl font-bold text-amber-400">$24.99</span>
-                            <span class="text-sm text-gray-400">Unidad</span>
-                        </div>
-                        <button @click="addToCart({name: 'Copa de Gin', price: '$24.99', image: 'img/copa.jpg'})" 
-                                class="btn-primary w-full group">
-                            <span class="relative z-10">Añadir al Carrito</span>
-                            <div class="absolute inset-0 bg-gradient-to-r from-amber-400 to-amber-600 transform scale-x-0 group-hover:scale-x-100 transition-transform origin-left"></div>
-                        </button>
-                    </div>
+            <!-- Filtros por Categoría -->
+            <div class="mb-12 text-center">
+                <h3 class="text-2xl font-bold text-green-600 mb-6 font-['Cormorant_Garamond']">Filtrar por Categoría</h3>
+                <div class="flex flex-wrap justify-center gap-4">
+                    <button @click="selectedCategory = 'all'" 
+                            :class="selectedCategory === 'all' ? 'bg-green-800 text-white' : 'bg-zinc-800 text-zinc-300 hover:bg-zinc-700'"
+                            class="px-6 py-2 rounded-lg font-medium transition-colors">
+                        Todos (<span x-text="products.length"></span>)
+                    </button>
+                    <button @click="selectedCategory = 'Tragos'" 
+                            :class="selectedCategory === 'Tragos' ? 'bg-green-800 text-white' : 'bg-zinc-800 text-zinc-300 hover:bg-zinc-700'"
+                            class="px-6 py-2 rounded-lg font-medium transition-colors">
+                        Tragos (<span x-text="products.filter(p => p.category === 'Tragos').length"></span>)
+                    </button>
+                    <button @click="selectedCategory = 'Cocteleria'" 
+                            :class="selectedCategory === 'Cocteleria' ? 'bg-green-800 text-white' : 'bg-zinc-800 text-zinc-300 hover:bg-zinc-700'"
+                            class="px-6 py-2 rounded-lg font-medium transition-colors">
+                        Cocteleria (<span x-text="products.filter(p => p.category === 'Cocteleria').length"></span>)
+                    </button>
+                    <button @click="selectedCategory = 'Espumantes'" 
+                            :class="selectedCategory === 'Espumantes' ? 'bg-green-800 text-white' : 'bg-zinc-800 text-zinc-300 hover:bg-zinc-700'"
+                            class="px-6 py-2 rounded-lg font-medium transition-colors">
+                        Espumantes (<span x-text="products.filter(p => p.category === 'Espumantes').length"></span>)
+                    </button>
+                    <button @click="selectedCategory = 'Sin Alchol'" 
+                            :class="selectedCategory === 'Sin Alchol' ? 'bg-green-800 text-white' : 'bg-zinc-800 text-zinc-300 hover:bg-zinc-700'"
+                            class="px-6 py-2 rounded-lg font-medium transition-colors">
+                        Sin Alchol (<span x-text="products.filter(p => p.category === 'Sin Alchol').length"></span>)
+                    </button>
                 </div>
-
-                <!-- Kit de Coctelería -->
-                <div class="card group hover-glow" x-data="{ showDetails: false }">
-                    <div class="relative overflow-hidden">
-                        <img src="img/kit.jpg" alt="Kit de Coctelería" class="w-full h-48 object-cover transform group-hover:scale-110 transition-transform duration-500">
-                        <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                        <button @click="showDetails = true" class="absolute inset-0 w-full h-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                            <span class="bg-amber-400 text-black px-4 py-2 rounded-lg transform -translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
-                                Ver Detalles
-                            </span>
-                        </button>
-                    </div>
-                    <div class="p-6">
-                        <h3 class="text-xl font-bold mb-2 text-amber-400">Kit de Coctelería</h3>
-                        <p class="text-gray-300 mb-4">Set completo para preparar cocteles profesionales.</p>
-                        <div class="flex justify-between items-center mb-4">
-                            <span class="text-2xl font-bold text-amber-400">$89.99</span>
-                            <span class="text-sm text-gray-400">Set</span>
-                        </div>
-                        <button @click="addToCart({name: 'Kit de Coctelería', price: '$89.99', image: 'img/kit.jpg'})" 
-                                class="btn-primary w-full group">
-                            <span class="relative z-10">Añadir al Carrito</span>
-                            <div class="absolute inset-0 bg-gradient-to-r from-amber-400 to-amber-600 transform scale-x-0 group-hover:scale-x-100 transition-transform origin-left"></div>
-                        </button>
-                    </div>
+                <div class="mt-4 text-zinc-400">
+                    <span x-text="'Mostrando ' + products.filter(p => selectedCategory === 'all' || p.category === selectedCategory).length + ' productos'"></span>
                 </div>
-
-                <!-- Tónica Artesanal -->
-                <div class="card group hover-glow" x-data="{ showDetails: false }">
-                    <div class="relative overflow-hidden">
-                        <img src="img/tonica.jpg" alt="Tónica Artesanal" class="w-full h-48 object-cover transform group-hover:scale-110 transition-transform duration-500">
-                        <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                        <button @click="showDetails = true" class="absolute inset-0 w-full h-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                            <span class="bg-amber-400 text-black px-4 py-2 rounded-lg transform -translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
-                                Ver Detalles
-                            </span>
-                        </button>
-                    </div>
-                    <div class="p-6">
-                        <h3 class="text-xl font-bold mb-2 text-amber-400">Tónica Artesanal</h3>
-                        <p class="text-gray-300 mb-4">Tónica premium para el mejor Gin Tonic.</p>
-                        <div class="flex justify-between items-center mb-4">
-                            <span class="text-2xl font-bold text-amber-400">$12.99</span>
-                            <span class="text-sm text-gray-400">Pack x4</span>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <template x-for="product in products.filter(p => selectedCategory === 'all' || p.category === selectedCategory)" :key="product.id">
+                    <div class="card group hover-glow">
+                        <div class="relative overflow-hidden">
+                            <img :src="product.image" :alt="product.name" class="w-full h-64 object-cover transform group-hover:scale-110 transition-transform duration-500">
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                         </div>
-                        <button @click="addToCart({name: 'Tónica Artesanal', price: '$12.99', image: 'img/tonica.jpg'})" 
-                                class="btn-primary w-full group">
-                            <span class="relative z-10">Añadir al Carrito</span>
-                            <div class="absolute inset-0 bg-gradient-to-r from-amber-400 to-amber-600 transform scale-x-0 group-hover:scale-x-100 transition-transform origin-left"></div>
-                        </button>
-                    </div>
-                </div>
-
-                <!-- Hielos Especiales -->
-                <div class="card group hover-glow" x-data="{ showDetails: false }">
-                    <div class="relative overflow-hidden">
-                        <img src="img/hielos.jpg" alt="Hielos Especiales" class="w-full h-48 object-cover transform group-hover:scale-110 transition-transform duration-500">
-                        <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                        <button @click="showDetails = true" class="absolute inset-0 w-full h-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                            <span class="bg-amber-400 text-black px-4 py-2 rounded-lg transform -translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
-                                Ver Detalles
-                            </span>
-                        </button>
-                    </div>
-                    <div class="p-6">
-                        <h3 class="text-xl font-bold mb-2 text-amber-400">Hielos Especiales</h3>
-                        <p class="text-gray-300 mb-4">Hielos de lujo para una experiencia premium.</p>
-                        <div class="flex justify-between items-center mb-4">
-                            <span class="text-2xl font-bold text-amber-400">$19.99</span>
-                            <span class="text-sm text-gray-400">Pack x6</span>
+                        <div class="p-6">
+                            <div class="flex items-center justify-between mb-2">
+                                <h3 class="text-xl font-bold text-green-600" x-text="product.name"></h3>
+                                <span class="text-xs text-zinc-500 bg-zinc-800 px-2 py-1 rounded" x-text="product.category"></span>
+                            </div>
+                            <p class="text-zinc-300 mb-4" x-text="product.description"></p>
+                            <button @click="addToCart({name: product.name, price: 'Consultar', image: product.image})" 
+                                    class="relative w-full bg-gradient-to-r from-green-600 to-green-800 text-white font-bold py-3 px-6 rounded-lg overflow-hidden group/btn hover:from-green-700 hover:to-green-900 transform hover:scale-105 transition-all duration-300 hover:shadow-lg">
+                                <span class="relative z-10 flex items-center justify-center">
+                                    <i class="fas fa-question-circle mr-2 group-hover/btn:rotate-12 transition-transform duration-300"></i>
+                                    Consultar Disponibilidad
+                                </span>
+                                <div class="absolute inset-0 bg-gradient-to-r from-green-500 to-green-700 transform scale-x-0 group-hover/btn:scale-x-100 transition-transform duration-500 origin-left"></div>
+                                <div class="absolute inset-0 bg-white/20 transform scale-x-0 group-hover/btn:scale-x-100 transition-transform duration-700 origin-left delay-100"></div>
+                            </button>
                         </div>
-                        <button @click="addToCart({name: 'Hielos Especiales', price: '$19.99', image: 'img/hielos.jpg'})" 
-                                class="btn-primary w-full group">
-                            <span class="relative z-10">Añadir al Carrito</span>
-                            <div class="absolute inset-0 bg-gradient-to-r from-amber-400 to-amber-600 transform scale-x-0 group-hover:scale-x-100 transition-transform origin-left"></div>
-                        </button>
                     </div>
-                </div>
+                </template>
+            </div>
+            
+            <!-- Botón Carta Digital al final -->
+            <div class="text-center mt-20 mb-8">
+                <a href="https://menu.fu.do/gintolagintoneriadelcentro/qr-menu" 
+                   target="_blank"
+                   class="inline-flex items-center px-8 py-4 bg-gradient-to-r from-green-600 to-green-800 text-white font-bold rounded-lg shadow-lg hover:from-green-700 hover:to-green-900 transform hover:scale-105 transition-all duration-300 hover:shadow-xl group">
+                    <i class="fas fa-book-open text-xl mr-3 group-hover:rotate-12 transition-transform duration-300"></i>
+                    Ver Menú Completo Digital
+                    <i class="fas fa-external-link-alt ml-3 group-hover:translate-x-1 transition-transform duration-300"></i>
+                </a>
+                <p class="text-zinc-400 mt-4 text-sm">Accede a nuestra carta completa con precios y más opciones</p>
             </div>
         </div>
     </section>
@@ -493,42 +465,42 @@
         <div class="container mx-auto px-4">
             <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
                 <div>
-                    <h3 class="text-xl font-bold text-amber-400 mb-4 font-['Cormorant_Garamond']">GINTO</h3>
-                    <p class="text-gray-400">El arte de la destilación en cada copa.</p>
+                    <h3 class="text-xl font-bold text-green-600 mb-4 font-['Cormorant_Garamond']">GINTO</h3>
+                    <p class="text-zinc-400">El arte del cocktail en cada copa.</p>
                 </div>
                 <div>
-                    <h4 class="text-lg font-bold text-amber-400 mb-4">Enlaces Rápidos</h4>
+                    <h4 class="text-lg font-bold text-green-600 mb-4">Enlaces Rápidos</h4>
                     <ul class="space-y-2">
-                        <li><a href="index.html#inicio" class="text-gray-400 hover:text-amber-400 transition-colors">Inicio</a></li>
-                        <li><a href="tienda.html" class="text-gray-400 hover:text-amber-400 transition-colors">Tienda</a></li>
-                        <li><a href="index.html#nosotros" class="text-gray-400 hover:text-amber-400 transition-colors">Nosotros</a></li>
-                        <li><a href="index.html#experiencias" class="text-gray-400 hover:text-amber-400 transition-colors">Experiencias</a></li>
+                        <li><a href="index.html#inicio" class="text-zinc-400 hover:text-green-600 transition-colors">Inicio</a></li>
+                        <li><a href="tienda.html" class="text-zinc-400 hover:text-green-600 transition-colors">Tienda</a></li>
+                        <li><a href="index.html#nosotros" class="text-zinc-400 hover:text-green-600 transition-colors">Nosotros</a></li>
+                        <li><a href="index.html#experiencias" class="text-zinc-400 hover:text-green-600 transition-colors">Experiencias</a></li>
                     </ul>
                 </div>
                 <div>
-                    <h4 class="text-lg font-bold text-amber-400 mb-4">Contacto</h4>
+                    <h4 class="text-lg font-bold text-green-600 mb-4">Contacto</h4>
                     <ul class="space-y-2">
-                        <li class="text-gray-400">info@ginto.com</li>
-                        <li class="text-gray-400">+54 123 456 7890</li>
-                        <li class="text-gray-400">Santo Tomé, Argentina</li>
+                        <li class="text-zinc-400">info@ginto.com</li>
+                        <li class="text-zinc-400">+54 123 456 7890</li>
+                        <li class="text-zinc-400">Santo Tomé, Argentina</li>
                     </ul>
                 </div>
                 <div>
-                    <h4 class="text-lg font-bold text-amber-400 mb-4">Síguenos</h4>
+                    <h4 class="text-lg font-bold text-green-600 mb-4">Síguenos</h4>
                     <div class="flex space-x-4">
-                        <a href="#" class="text-gray-400 hover:text-amber-400 transition-colors">
+                        <a href="#" class="text-zinc-400 hover:text-green-600 transition-colors">
                             <i class="fab fa-facebook-f"></i>
                         </a>
-                        <a href="#" class="text-gray-400 hover:text-amber-400 transition-colors">
+                        <a href="#" class="text-zinc-400 hover:text-green-600 transition-colors">
                             <i class="fab fa-instagram"></i>
                         </a>
-                        <a href="#" class="text-gray-400 hover:text-amber-400 transition-colors">
+                        <a href="#" class="text-zinc-400 hover:text-green-600 transition-colors">
                             <i class="fab fa-twitter"></i>
                         </a>
                     </div>
                 </div>
             </div>
-            <div class="border-t border-gray-800 mt-12 pt-8 text-center text-gray-400">
+            <div class="border-t border-zinc-800 mt-12 pt-8 text-center text-zinc-400">
                 <p>&copy; 2024 Ginto Santo Tomé. Todos los derechos reservados.</p>
             </div>
         </div>
