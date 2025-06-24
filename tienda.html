@@ -53,8 +53,6 @@
     </style>
 </head>
 <body class="bg-gradient-to-br from-zinc-900 via-zinc-800 to-black text-zinc-50 font-['Inter']" x-data="{ 
-    cartOpen: false,
-    cart: [],
     products: [
         // COCTELERIA
         {
@@ -201,65 +199,6 @@
             category: 'Sin Alchol'
         }
     ],
-    addToCart(product) {
-        this.cart.push(product);
-        this.showNotification('Producto añadido a consulta');
-    },
-    removeFromCart(index) {
-        this.cart.splice(index, 1);
-    },
-    showNotification(message) {
-        const notification = document.createElement('div');
-        notification.className = 'fixed bottom-4 right-4 bg-green-800 text-white px-6 py-3 rounded-lg shadow-lg transform transition-all duration-500 translate-y-full opacity-0';
-        notification.textContent = message;
-        document.body.appendChild(notification);
-        setTimeout(() => {
-            notification.classList.remove('translate-y-full', 'opacity-0');
-        }, 100);
-        setTimeout(() => {
-            notification.classList.add('translate-y-full', 'opacity-0');
-            setTimeout(() => notification.remove(), 500);
-        }, 2000);
-    },
-    addProduct(name, description, image, category) {
-        const newProduct = {
-            id: this.products.length + 1,
-            name: name,
-            description: description,
-            image: image,
-            category: category
-        };
-        this.products.push(newProduct);
-        this.showNotification('Producto agregado exitosamente');
-    },
-    sendWhatsAppQuery() {
-        if (this.cart.length === 0) {
-            this.showNotification('No hay productos en consulta');
-            return;
-        }
-        
-        const phoneNumber = '5493425420251'; // Número de WhatsApp sin el +
-        const message = this.generateWhatsAppMessage();
-        const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
-        
-        window.open(whatsappUrl, '_blank');
-        this.showNotification('Abriendo WhatsApp...');
-    },
-    generateWhatsAppMessage() {
-        let message = '🍸 *Consulta de Productos - Ginto Santo Tomé*\n\n';
-        message += 'Hola! Me gustaría consultar sobre los siguientes productos:\n\n';
-        
-        this.cart.forEach((item, index) => {
-            message += `${index + 1}. *${item.name}*\n`;
-            message += `   ${item.description}\n\n`;
-        });
-        
-        message += `Total de productos: ${this.cart.length}\n\n`;
-        message += 'Por favor, ¿podrían informarme sobre disponibilidad y precios?\n\n';
-        message += '¡Gracias! 🍹';
-        
-        return message;
-    },
     selectedCategory: 'all'
 }">
     <!-- Navbar -->
@@ -291,71 +230,9 @@
                         <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-green-800/50 group-hover:w-full transition-all duration-300"></span>
                     </a>
                 </div>
-                <!-- Carrito Icon -->
-                <button @click="cartOpen = !cartOpen" class="relative text-green-600 hover:text-green-500 transition-colors">
-                    <i class="fas fa-question-circle text-xl"></i>
-                    <span x-show="cart.length > 0" class="absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">
-                        <span x-text="cart.length"></span>
-                    </span>
-                </button>
             </div>
         </div>
     </nav>
-
-    <!-- Carrito Sidebar -->
-    <div x-show="cartOpen" 
-         class="fixed inset-0 bg-black/50 z-50 transition-opacity"
-         x-transition:enter="transition ease-out duration-300"
-         x-transition:enter-start="opacity-0"
-         x-transition:enter-end="opacity-100"
-         x-transition:leave="transition ease-in duration-200"
-         x-transition:leave-start="opacity-100"
-         x-transition:leave-end="opacity-0">
-        <div class="absolute right-0 top-0 h-full w-96 bg-zinc-900 shadow-xl transform transition-transform"
-             x-transition:enter="transition ease-out duration-300"
-             x-transition:enter-start="translate-x-full"
-             x-transition:enter-end="translate-x-0"
-             x-transition:leave="transition ease-in duration-200"
-             x-transition:leave-start="translate-x-0"
-             x-transition:leave-end="translate-x-full">
-            <div class="p-6">
-                <div class="flex justify-between items-center mb-6">
-                    <h3 class="text-2xl font-bold text-green-600">Consulta</h3>
-                    <button @click="cartOpen = false" class="text-zinc-400 hover:text-white">
-                        <i class="fas fa-times"></i>
-                    </button>
-                </div>
-                <div class="space-y-4 max-h-[calc(100vh-200px)] overflow-y-auto">
-                    <template x-if="cart.length === 0">
-                        <p class="text-zinc-400 text-center py-8">No hay productos en consulta</p>
-                    </template>
-                    <template x-for="(item, index) in cart" :key="index">
-                        <div class="flex items-center space-x-4 bg-zinc-800/50 p-4 rounded-lg">
-                            <img :src="item.image" :alt="item.name" class="w-16 h-16 object-cover rounded">
-                            <div class="flex-1">
-                                <h4 class="text-green-600 font-bold" x-text="item.name"></h4>
-                                <p class="text-zinc-400" x-text="item.price"></p>
-                            </div>
-                            <button @click="removeFromCart(index)" class="text-red-400 hover:text-red-300">
-                                <i class="fas fa-trash"></i>
-                            </button>
-                        </div>
-                    </template>
-                </div>
-                <div class="mt-6 pt-6 border-t border-zinc-800">
-                    <div class="flex justify-between items-center mb-4">
-                        <span class="text-zinc-400">Productos:</span>
-                        <span class="text-2xl font-bold text-green-600" x-text="cart.length"></span>
-                    </div>
-                    <button @click="sendWhatsAppQuery()" 
-                            class="w-full bg-green-800 text-white font-bold py-3 rounded-lg hover:bg-green-700 transition-colors flex items-center justify-center">
-                        <i class="fab fa-whatsapp mr-2"></i>
-                        Enviar Consulta por WhatsApp
-                    </button>
-                </div>
-            </div>
-        </div>
-    </div>
 
     <!-- Hero Section -->
     <section class="pt-32 pb-20 bg-gradient-to-b from-zinc-800 to-zinc-900">
@@ -432,15 +309,6 @@
                                 <span class="text-xs text-zinc-500 bg-zinc-800 px-2 py-1 rounded" x-text="product.category"></span>
                             </div>
                             <p class="text-zinc-300 mb-4" x-text="product.description"></p>
-                            <button @click="addToCart({name: product.name, price: 'Consultar', image: product.image})" 
-                                    class="relative w-full bg-gradient-to-r from-green-600 to-green-800 text-white font-bold py-3 px-6 rounded-lg overflow-hidden group/btn hover:from-green-700 hover:to-green-900 transform hover:scale-105 transition-all duration-300 hover:shadow-lg">
-                                <span class="relative z-10 flex items-center justify-center">
-                                    <i class="fas fa-question-circle mr-2 group-hover/btn:rotate-12 transition-transform duration-300"></i>
-                                    Consultar Disponibilidad
-                                </span>
-                                <div class="absolute inset-0 bg-gradient-to-r from-green-500 to-green-700 transform scale-x-0 group-hover/btn:scale-x-100 transition-transform duration-500 origin-left"></div>
-                                <div class="absolute inset-0 bg-white/20 transform scale-x-0 group-hover/btn:scale-x-100 transition-transform duration-700 origin-left delay-100"></div>
-                            </button>
                         </div>
                     </div>
                 </template>
